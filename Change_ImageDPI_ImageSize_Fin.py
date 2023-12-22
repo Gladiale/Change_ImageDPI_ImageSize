@@ -5,7 +5,7 @@ import PySimpleGUI as sg
 from decimal import Decimal, ROUND_HALF_UP
 
 source_code = {
-    'SourceCode_URL': 'https://github.com/',
+    'SourceCode_URL': 'https://github.com/Gladiale/Change_ImageDPI_ImageSize',
     'SourceCode_Font': ('Courier New', 11, 'underline')
 }
 
