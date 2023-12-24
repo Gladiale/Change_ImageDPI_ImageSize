@@ -25,10 +25,10 @@ layout = [
     [sg.InputText(), sg.FolderBrowse(key='router')],
     [sg.Text('変更したいDPIを設定'),sg.InputText(size=size, key='dpiChange')],
     [sg.Text('処理したいファイル種類'), sg.Checkbox("JPG", key="C_JPG", default=True),
-    sg.Checkbox("JPEG", key="C_JPEG", default=True), sg.Checkbox("PNG", key="C_PNG", default=True), sg.Checkbox("TGA", key="C_TGA", default=False)],
+    sg.Checkbox("JPEG", key="C_JPEG", default=True), sg.Checkbox("PNG", key="C_PNG", default=True), sg.Checkbox("TGA", key="C_TGA", default=False, tooltip='TGAファイルは一律「DPI情報ロストのファイル」として処理')],
     [sg.Radio('DPI情報ロストのファイルを', group_id='runWay', default=True, key="addDPI"),
     sg.InputText('200', key="dpiSetDefault", size=size), sg.Text('DPIと見なして処理')],
-    [sg.Radio("DPI情報ロストのファイルは何の処理もしないままPASS", group_id='runWay', key="noneDPI")],
+    [sg.Radio("DPI情報ロストのファイルは何の処理もないままPASS", group_id='runWay', key="noneDPI")],
     [sg.Submit(button_text='実行ボタン', key="startBtn"), sg.Text('ver 1.03', pad=((left,right),(top,bottom)), text_color='deeppink'),
     sg.Text('(SourceCode)', tooltip=source_code['SourceCode_URL'], enable_events=True, font=source_code['SourceCode_Font'], text_color='violet', key=f'URL {source_code["SourceCode_URL"]}')]
 ]
