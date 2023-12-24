@@ -11,7 +11,7 @@ source_code = {
 
 size = (5, 5)
 
-left = 185
+left = 135
 right = 0
 top = 0
 bottom = 0
@@ -23,9 +23,9 @@ sg.theme('Dark Red')
 layout = [
     [sg.Text('処理したいフォルダを選んでください：')],
     [sg.InputText(), sg.FolderBrowse(key='router')],
-    [sg.Text('変更したいDPIを設定'),sg.InputText(size=size, key='dpiChange')],
-    [sg.Text('処理したいファイル種類'), sg.Checkbox("JPG", key="C_JPG", default=True),
-    sg.Checkbox("JPEG", key="C_JPEG", default=True), sg.Checkbox("PNG", key="C_PNG", default=True), sg.Checkbox("TGA", key="C_TGA", default=False, tooltip='TGAファイルは一律「DPI情報ロストのファイル」として処理')],
+    [sg.Text('変更したいDPIを設定'), sg.InputText(size=size, key='dpiChange')],
+    [sg.Text('処理したいファイル種類'), sg.Checkbox("JPG", key="C_JPG", default=True, tooltip='JPEG拡張子も含む'),
+    sg.Checkbox("PNG", key="C_PNG", default=True), sg.Checkbox("TGA", key="C_TGA", default=False, tooltip='TGAファイルは一律「DPI情報ロストのファイル」として処理')],
     [sg.Radio('DPI情報ロストのファイルを', group_id='runWay', default=True, key="addDPI"),
     sg.InputText('200', key="dpiSetDefault", size=size), sg.Text('DPIと見なして処理')],
     [sg.Radio("DPI情報ロストのファイルは何の処理もないままPASS", group_id='runWay', key="noneDPI")],
@@ -64,20 +64,14 @@ while True:
         noneDPI = values['noneDPI']
 
         Boolean_JPG = values['C_JPG']
-        Boolean_JPEG = values['C_JPEG']
         Boolean_PNG = values['C_PNG']
         Boolean_TGA = values['C_TGA']
 
         match Boolean_JPG:
             case True:
-                _extension = ['.jpg']
+                _extension = ['.jpg', '.jpeg']
             case _:
                 _extension = []
-        match Boolean_JPEG:
-            case True:
-                _extension.append('.jpeg')
-            case _:
-                pass
         match Boolean_PNG:
             case True:
                 _extension.append('.png')
