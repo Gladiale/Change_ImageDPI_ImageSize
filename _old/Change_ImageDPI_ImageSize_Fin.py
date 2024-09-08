@@ -1,16 +1,17 @@
+import webbrowser
 from pathlib import Path
 from PIL import Image
 import PySimpleGUI as sg
 from decimal import Decimal, ROUND_HALF_UP
 
 source_code = {
-    'SourceCode_Message': 'By Takeuchi',
-    'SourceCode_Font': ('Courier New', 11)
+    'SourceCode_URL': 'https://github.com/Gladiale/Change_ImageDPI_ImageSize',
+    'SourceCode_Font': ('Courier New', 11, 'underline')
 }
 
 size = (5, 5)
 
-left = 140
+left = 135
 right = 0
 top = 0
 bottom = 0
@@ -29,7 +30,7 @@ layout = [
     sg.InputText('200', key="dpiSetDefault", size=size), sg.Text('DPIと見なして処理')],
     [sg.Radio("DPI情報ロストのファイルは何の処理もないままPASS", group_id='runWay', key="noneDPI")],
     [sg.Submit(button_text='実行ボタン', key="startBtn"), sg.Text('ver 1.03', pad=((left,right),(top,bottom)), text_color='deeppink'),
-    sg.Text(source_code["SourceCode_Message"], font=source_code['SourceCode_Font'], text_color='violet')]
+    sg.Text('(SourceCode)', tooltip=source_code['SourceCode_URL'], enable_events=True, font=source_code['SourceCode_Font'], text_color='violet', key=f'URL {source_code["SourceCode_URL"]}')]
 ]
 
 # windowオブジェクト生成
@@ -42,6 +43,10 @@ while True:
     # 右上のXボタン押した時にウインドウ画面を閉じる
     if event is None:
         break
+
+    if event.startswith("URL "):
+        url = event.split(' ')[1]
+        webbrowser.open(url)
 
     if event == 'startBtn':
         _dir = values['router']
@@ -64,17 +69,17 @@ while True:
 
         match Boolean_JPG:
             case True:
-                _extension = ['.jpg', '.jpeg', ".JPG", ".JPEG"]
+                _extension = ['.jpg', '.jpeg']
             case _:
                 _extension = []
         match Boolean_PNG:
             case True:
-                _extension += ['.png', ".PNG"]
+                _extension.append('.png')
             case _:
                 pass
         match Boolean_TGA:
             case True:
-                _extension += ['.tga', ".TGA"]
+                _extension.append('.tga')
             case _:
                 pass
 
